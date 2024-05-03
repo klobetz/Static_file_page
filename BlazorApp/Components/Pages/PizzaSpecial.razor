@@ -1,0 +1,43 @@
+﻿@page "/pizzaspecial"
+@using BlazorApp.Model
+@rendermode InteractiveServer
+
+<h3>PizzaSpecial</h3>
+<hr />
+<div class="main">
+    <ul class="pizza-cards">
+        @if (pizzaLista != null)
+        {
+            @foreach (var item in pizzaLista)
+            {
+                <li style="background-image: url(@item.ImageUrl)">
+                    <div class="pizza-info">
+                        <span class="title">@item.Name</span>
+                        @item.Description
+                        <span class="price">@item.GetBasePrice()</span>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+
+
+@code {
+    List<PizzaSpec> pizzaLista = new();
+
+    protected override void OnInitialized()
+    {
+        pizzaLista.AddRange(new List<PizzaSpec>
+        {
+            new PizzaSpec {Name = "Bacon-ös pizza", BasePrice = 17.32M, Description="Ez egy Bacon-os óriás pizza", ImageUrl="img/pizzas/bacon.jpg"},
+            new PizzaSpec {Name = "Sajtos pizza", BasePrice = 14.32M, Description="Ez egy Sajtos óriás pizza", ImageUrl="img/pizzas/cheese.jpg"},
+            new PizzaSpec {Name = "Margherita pizza", BasePrice = 13.32M, Description="Ez egy Margherita óriás pizza", ImageUrl="img/pizzas/margherita.jpg"},
+            new PizzaSpec {Name = "Húsos pizza", BasePrice = 16.32M, Description="Ez egy Húsos óriás pizza", ImageUrl="img/pizzas/meaty.jpg"},
+            new PizzaSpec {Name = "Gombás pizza", BasePrice = 19.32M, Description="Ez egy Gombás óriás pizza", ImageUrl="img/pizzas/mushroom.jpg"},
+            new PizzaSpec {Name = "Paprikás pizza", BasePrice = 12.32M, Description="Ez egy Paprikás óriás pizza", ImageUrl="img/pizzas/pepperoni.jpg"},
+            new PizzaSpec {Name = "Salátás pizza", BasePrice = 16.82M, Description="Ez egy Salátás óriás pizza", ImageUrl="img/pizzas/salad.jpg"}
+        });
+    }
+}
